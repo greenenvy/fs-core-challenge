@@ -5,6 +5,8 @@ import LoginScreen from "../LoginScreen/LoginScreen";
 import axios from "axios";
 import ErrorHeader from "../ErrorHeader/ErrorHeader";
 import Input from "../Input/Input";
+import SockJS from "sockjs-client";
+import { Client } from "@stomp/stompjs";
 
 const Chat = () => {
   const [error, setError] = useState(null);
@@ -39,6 +41,27 @@ const Chat = () => {
         }
       });
   }, [loggedOnUser]);
+
+  useEffect(() => {
+    const socket = new SockJS("http://localhost:8888/chat");
+    const stompClient = new Client({
+      webSocketFactory: () => socket,
+    });
+
+    stompClient.onConnect = (frame) => {
+      console.log("Connected: " + frame);
+      stompClient.subscribe("/all", (message) => {
+        const mes = JSON.parse(message.body);
+        setMessages((prevMessages) => [...prevMessages, mes]);
+      });
+    };
+
+    stompClient.activate();
+
+    return () => {
+      stompClient.deactivate();
+    };
+  });
 
   return (
     <div className="chat">
