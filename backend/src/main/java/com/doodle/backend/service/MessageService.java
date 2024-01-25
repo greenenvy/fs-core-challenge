@@ -7,6 +7,7 @@ import com.doodle.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,11 +17,17 @@ import java.util.List;
 public class MessageService {
     private final MessageRepository messageRepository;
     private final UserRepository userRepository;
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
-    public MessageService(MessageRepository messageRepository, UserRepository userRepository) {
+    public MessageService(
+            MessageRepository messageRepository,
+            UserRepository userRepository,
+            SimpMessagingTemplate simpMessagingTemplate
+    ) {
         this.messageRepository = messageRepository;
         this.userRepository = userRepository;
+        this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
     public List<Message> getMessages() {
@@ -34,6 +41,8 @@ public class MessageService {
             HttpStatus.NOT_FOUND
         ));
         message.setPosted(new Date());
-        return this.messageRepository.insert(message);
+        Message newMessage = this.messageRepository.insert(message);
+        this.simpMessagingTemplate.convertAndSend("/all", newMessage);
+        return newMessage;
     }
 }
