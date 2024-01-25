@@ -28,6 +28,8 @@ services:
       - MONGO_HOST=mongodb
     networks:
       - chat
+    depends_on:
+      - mongodb
 
 networks:
   chat:

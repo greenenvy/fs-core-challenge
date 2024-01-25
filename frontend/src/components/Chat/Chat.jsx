@@ -20,6 +20,7 @@ const Chat = () => {
       })
       .then((response) => {
         setLoggedOnUser(response.data.username);
+        sessionStorage.setItem("loggedOnUser", response.data.username);
         setError(null);
       })
       .catch((error) => {
@@ -56,6 +57,10 @@ const Chat = () => {
   }, [loggedOnUser]);
 
   useEffect(() => {
+    if (sessionStorage.getItem("loggedOnUser")) {
+      setLoggedOnUser(sessionStorage.getItem("loggedOnUser"));
+    }
+
     const socket = new SockJS("http://localhost:8888/chat");
     const stompClient = new Client({
       webSocketFactory: () => socket,
@@ -74,7 +79,7 @@ const Chat = () => {
     return () => {
       stompClient.deactivate();
     };
-  });
+  }, []);
 
   return (
     <div className="chat">
