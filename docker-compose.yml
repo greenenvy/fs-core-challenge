@@ -6,6 +6,7 @@ services:
     restart: always
     volumes:
       - chat-data:/data/db/
+      - ./mongodb/init.js:/docker-entrypoint-initdb.d/init.js
     ports:
       - 27017:27017
     environment:
