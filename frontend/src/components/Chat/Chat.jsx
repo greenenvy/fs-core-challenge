@@ -1,7 +1,6 @@
 import React from "react";
 import "./Chat.css";
-import OtherMessage from "../OtherMessage/OtherMessage";
-import PersonalMessage from "../PersonalMessage/PersonalMessage";
+import Message from "../Message/Message";
 
 const Chat = () => {
   const messages = [
@@ -42,10 +41,8 @@ const Chat = () => {
   return (
     <div className="chat">
       {messages.map((message) => {
-        return message.sender !== loggedOnUser ? (
-          <OtherMessage message={message}></OtherMessage>
-        ) : (
-          <PersonalMessage message={message}></PersonalMessage>
+        return (
+          <Message message={message} loggedOnUser={loggedOnUser}></Message>
         );
       })}
     </div>

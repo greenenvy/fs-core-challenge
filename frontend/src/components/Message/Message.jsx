@@ -1,9 +1,13 @@
 import React from "react";
-import "./PersonalMessage.css";
+import "./Message.css";
 
-const PersonalMessage = ({ message }) => {
+const Message = ({ message, loggedOnUser }) => {
   return (
-    <div className="personal-message">
+    <div
+      className={
+        loggedOnUser === message.sender ? "personal-message" : "other-message"
+      }
+    >
       <div className="user">{message.sender}</div>
       <div className="content">{message.content}</div>
       <div className="date">
@@ -13,4 +17,4 @@ const PersonalMessage = ({ message }) => {
   );
 };
 
-export default PersonalMessage;
+export default Message;
