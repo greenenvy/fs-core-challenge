@@ -8,7 +8,9 @@ const Message = ({ message, loggedOnUser }) => {
         loggedOnUser === message.sender ? "personal-message" : "other-message"
       }
     >
-      <div className="user">{message.sender}</div>
+      <div className="user">
+        {loggedOnUser === message.sender ? "You" : message.sender}
+      </div>
       <div className="content">{message.content}</div>
       <div className="date">
         {new Date(message.posted).toLocaleDateString()}

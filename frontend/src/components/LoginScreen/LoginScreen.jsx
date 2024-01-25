@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LoginScreen.css";
 
-const LoginScreen = () => {
+const LoginScreen = ({ login }) => {
+  const [username, setUsername] = useState("");
+
   return (
     <div className="login-screen">
       <div className="user-login-field">
         <div>Enter your username:</div>
         <div>
-          <input className="input-field" />
-          <button className="login-button">Login</button>
+          <input
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+            className="input-field"
+          />
+          <button onClick={() => login(username)} className="login-button">
+            Login
+          </button>
         </div>
       </div>
     </div>
