@@ -8,7 +8,7 @@ const LoginScreen = ({ login }) => {
     <div className="login-screen">
       <div className="user-login-field">
         <div>Enter your username:</div>
-        <div>
+        <div className="input-container">
           <input
             onChange={(event) => {
               setUsername(event.target.value);
