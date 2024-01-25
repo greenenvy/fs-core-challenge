@@ -3,8 +3,10 @@ import "./Chat.css";
 import Message from "../Message/Message";
 import LoginScreen from "../LoginScreen/LoginScreen";
 import axios from "axios";
+import ErrorHeader from "../ErrorHeader/ErrorHeader";
 
 const Chat = () => {
+  const [error, setError] = useState(null);
   const [loggedOnUser, setLoggedOnUser] = useState("");
   const messages = [
     {
@@ -47,23 +49,18 @@ const Chat = () => {
       })
       .then((response) => {
         setLoggedOnUser(response.data.username);
-        console.log("Success:", response.data);
+        setError(null);
       })
       .catch((error) => {
         if (error.response) {
-          console.log("Error Data:", error.response.data);
-          console.log("Error Status:", error.response.status);
-          console.log("Error Headers:", error.response.headers);
-        } else if (error.request) {
-          console.log("Error Request:", error.request);
-        } else {
-          console.log("Error Message:", error.message);
+          setError(error.response.data);
         }
       });
   };
 
   return (
     <div className="chat">
+      {error && <ErrorHeader error={error}></ErrorHeader>}
       {loggedOnUser ? (
         messages.map((message) => {
           return (
