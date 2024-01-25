@@ -1,0 +1,22 @@
+.message-input {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  background-color: #d5dade;
+  padding: 10px;
+}
+
+.message-field {
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+}
+
+.message-button {
+  border: none;
+  color: #84888e;
+  background-color: #d5dade;
+  margin-left: 20px;
+  margin-right: 20px;
+}

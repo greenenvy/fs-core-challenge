@@ -4,6 +4,7 @@ import Message from "../Message/Message";
 import LoginScreen from "../LoginScreen/LoginScreen";
 import axios from "axios";
 import ErrorHeader from "../ErrorHeader/ErrorHeader";
+import Input from "../Input/Input";
 
 const Chat = () => {
   const [error, setError] = useState(null);
@@ -62,11 +63,14 @@ const Chat = () => {
     <div className="chat">
       {error && <ErrorHeader error={error}></ErrorHeader>}
       {loggedOnUser ? (
-        messages.map((message) => {
-          return (
-            <Message message={message} loggedOnUser={loggedOnUser}></Message>
-          );
-        })
+        <div>
+          {messages.map((message) => {
+            return (
+              <Message message={message} loggedOnUser={loggedOnUser}></Message>
+            );
+          })}
+          <Input></Input>
+        </div>
       ) : (
         <LoginScreen login={login}></LoginScreen>
       )}
