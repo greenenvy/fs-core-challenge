@@ -1,4 +1,31 @@
 # The challenge (Fullstack Engineer)
+
+The example is being run just by the command:
+
+```
+docker-compose up -d
+```
+
+## Instructions and screens
+
+<img src="frontend/screen1.png" alt="Login screen" width="250"/>
+
+The user needs to input a predefined username that exist from the database, available choices are: user1, user2, user3, user4, user5, joffrey, NINJA, i am mister brilliant, martin57, Patricia
+
+If the user inputs a invalid one the following screen will appear:
+
+<img src="frontend/screen2.png" alt="Error message" width="250"/>
+
+When the user is ok, then the window with messages will popup (with the predefined ones from the image)
+
+<img src="frontend/screen3.png" alt="Messages" width="250"/>
+
+You can open multiple tabs where each tab will require a ,,login,,
+
+You can access it from the phone on the address 192.168.X.X if the phone is on the same network as the PC that runned docker compose
+
+# Instructions
+
 We want you to build a simple chat application which is able to send messages and display messages
 from all senders:
 
@@ -17,13 +44,14 @@ Your API should have the following features:
 The design of the API is up to you.
 
 Now, when it comes to the frontend, you should use your HTML and CSS skills to present the messages
-as depicted in the wireframe. We would like to test your knowledge of these technologies, 
+as depicted in the wireframe. We would like to test your knowledge of these technologies,
 so we do not recommend using UI component libraries (material-ui, antd, ...).
 
 Your solution should be runnable locally using `docker-compose`. Don't forget to include all the
 dependencies of your service in the composer file, including your database system of choice.
 
 ## Rules
+
 We understand your time is precious and would not want you to spend more than **3 to 5 hours** on this
 over the span of **1 week max**.
 
@@ -41,12 +69,11 @@ given more time, what you would differently a second time around, etc.
 
 Here are some pointers for you of things we will be looking for:
 
-
-* Commit often, write useful commit messages
-* Code readability
-* Performance: it should load reasonably fast on a mobile device
-* Accessibility: the more usable the interface, the better
-* Design: we are not looking for pixel-pushing, but we love attention to detail
+- Commit often, write useful commit messages
+- Code readability
+- Performance: it should load reasonably fast on a mobile device
+- Accessibility: the more usable the interface, the better
+- Design: we are not looking for pixel-pushing, but we love attention to detail
 
 ## Next steps
 
