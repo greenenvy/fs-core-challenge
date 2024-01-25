@@ -4,10 +4,7 @@ import com.doodle.backend.domain.Message;
 import com.doodle.backend.service.MessageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,15 @@ public class MessageController {
     public ResponseEntity<List<Message>> getMessages() {
         List<Message> messages = this.messageService.getMessages();
         return new ResponseEntity<>(messages, HttpStatus.OK);
+    }
+
+    @PostMapping(
+        value = "/post",
+        consumes = "application/json",
+        produces = "application/json"
+    )
+    public ResponseEntity<Message> postMessage(@RequestBody Message message) {
+        Message retVal = this.messageService.postMessage(message);
+        return new ResponseEntity<>(retVal, HttpStatus.OK);
     }
 }

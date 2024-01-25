@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,5 +20,10 @@ public class MessageService {
 
     public List<Message> getMessages() {
         return this.messageRepository.findAll(Sort.by(Sort.Direction.ASC, "posted"));
+    }
+
+    public Message postMessage(Message message) {
+        message.setPosted(new Date());
+        return this.messageRepository.insert(message);
     }
 }
