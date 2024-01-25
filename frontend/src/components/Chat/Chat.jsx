@@ -47,7 +47,11 @@ const Chat = () => {
         <div>
           {messages.map((message) => {
             return (
-              <Message message={message} loggedOnUser={loggedOnUser}></Message>
+              <Message
+                key={message._id}
+                message={message}
+                loggedOnUser={loggedOnUser}
+              ></Message>
             );
           })}
           <Input></Input>
