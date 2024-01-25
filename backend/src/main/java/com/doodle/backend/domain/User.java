@@ -6,17 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-import java.util.UUID;
-
-@Document(collection = "allChat")
+@Document(collection = "users")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Message {
+public class User {
     private String _id;
-    private User sender;
-    private String content;
-    private Date posted;
+    private String username;
 }
