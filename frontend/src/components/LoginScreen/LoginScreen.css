@@ -1,0 +1,26 @@
+.login-screen {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: lightgray;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-field {
+  margin-top: 10px;
+  margin-right: 10px;
+  min-width: 300px;
+  border-radius: 5px;
+  height: 25px;
+  padding: 10px;
+  border: none;
+}
+
+.login-button {
+  height: 45px;
+  padding: 10px;
+  border: none;
+  background-color: #c3c2c2;
+  border-radius: 5px;
+}

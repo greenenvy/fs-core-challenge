@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Chat.css";
 import Message from "../Message/Message";
+import LoginScreen from "../LoginScreen/LoginScreen";
 
 const Chat = () => {
+  const [loggedOnUser, setLoggedOnUser] = useState("");
   const messages = [
     {
       sender: "joffrey",
@@ -36,15 +38,18 @@ const Chat = () => {
       posted: new Date(1520673720000),
     },
   ];
-  const loggedOnUser = "user1";
 
   return (
     <div className="chat">
-      {messages.map((message) => {
-        return (
-          <Message message={message} loggedOnUser={loggedOnUser}></Message>
-        );
-      })}
+      {loggedOnUser ? (
+        messages.map((message) => {
+          return (
+            <Message message={message} loggedOnUser={loggedOnUser}></Message>
+          );
+        })
+      ) : (
+        <LoginScreen></LoginScreen>
+      )}
     </div>
   );
 };
