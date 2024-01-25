@@ -10,3 +10,7 @@
   box-sizing: border-box;
   background-color: white;
 }
+
+.message-container {
+  overflow: auto;
+}

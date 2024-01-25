@@ -7,8 +7,6 @@ services:
     volumes:
       - chat-data:/data/db/
       - ./mongodb/init.js:/docker-entrypoint-initdb.d/init.js
-    ports:
-      - 27017:27017
     environment:
       - MONGO_INITDB_DATABASE=chat
       - MONGO_INITDB_ROOT_USERNAME=chat
@@ -22,14 +20,25 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     restart: always
-    ports:
-      - 8888:8888
     environment:
       - MONGO_HOST=mongodb
     networks:
       - chat
     depends_on:
       - mongodb
+
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    restart: always
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8888:80
+    networks:
+      - chat
 
 networks:
   chat:

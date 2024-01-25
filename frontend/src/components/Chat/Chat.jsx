@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Chat.css";
 import Message from "../Message/Message";
 import LoginScreen from "../LoginScreen/LoginScreen";
@@ -9,13 +9,18 @@ import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 
 const Chat = () => {
+  const messageDiv = useRef(null);
   const [error, setError] = useState(null);
   const [loggedOnUser, setLoggedOnUser] = useState("");
   const [messages, setMessages] = useState([]);
 
+  const scrollToBottom = () => {
+    messageDiv.current?.scrollTo(0, messageDiv.current?.scrollHeight);
+  };
+
   const login = (username) => {
     axios
-      .post("http://localhost:8888/users/login", {
+      .post("/users/login", {
         username,
       })
       .then((response) => {
@@ -32,7 +37,7 @@ const Chat = () => {
 
   const sendMessage = (content) => {
     axios
-      .post("http://localhost:8888/message/post", {
+      .post("/message/post", {
         sender: loggedOnUser,
         content: content,
       })
@@ -45,7 +50,7 @@ const Chat = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8888/message/all")
+      .get("/message/all")
       .then((response) => {
         setMessages(response.data);
       })
@@ -61,7 +66,7 @@ const Chat = () => {
       setLoggedOnUser(sessionStorage.getItem("loggedOnUser"));
     }
 
-    const socket = new SockJS("http://localhost:8888/chat");
+    const socket = new SockJS("/chat");
     const stompClient = new Client({
       webSocketFactory: () => socket,
     });
@@ -81,22 +86,28 @@ const Chat = () => {
     };
   }, []);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <div className="chat">
       {error && <ErrorHeader error={error}></ErrorHeader>}
       {loggedOnUser ? (
-        <div>
-          {messages.map((message) => {
-            return (
-              <Message
-                key={message._id}
-                message={message}
-                loggedOnUser={loggedOnUser}
-              ></Message>
-            );
-          })}
+        <React.Fragment>
+          <div ref={messageDiv} className="message-container">
+            {messages.map((message) => {
+              return (
+                <Message
+                  key={message._id}
+                  message={message}
+                  loggedOnUser={loggedOnUser}
+                ></Message>
+              );
+            })}
+          </div>
           <Input sendMessage={sendMessage}></Input>
-        </div>
+        </React.Fragment>
       ) : (
         <LoginScreen login={login}></LoginScreen>
       )}
