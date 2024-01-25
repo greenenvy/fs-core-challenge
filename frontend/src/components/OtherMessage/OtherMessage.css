@@ -1,0 +1,17 @@
+.other-message {
+  padding: 5px 10px 5px 10px;
+}
+
+.user,
+.date {
+  color: #c8cfd3;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 2px;
+}
+.content {
+  margin-bottom: 5px;
+  color: #84888e;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
