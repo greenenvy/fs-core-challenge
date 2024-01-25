@@ -3,7 +3,7 @@
 The example is being run just by the command:
 
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Instructions and screens
