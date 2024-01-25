@@ -8,14 +8,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document(collection = "allChat")
+@Document(collection = "chat")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class Message {
     private String _id;
-    private User sender;
+    private String sender;
     private String content;
     private Date posted;
 }

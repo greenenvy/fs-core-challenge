@@ -1,5 +1,14 @@
 spring:
   application:
     name: fe-core-challenge
+  data:
+    mongodb:
+      authentication-database: admin
+      username: chat
+      password: chatsecret
+      database: chat
+      port: 27017
+      host: ${MONGO_HOST:localhost}
+
 server:
   port: 8888
