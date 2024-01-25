@@ -29,6 +29,19 @@ const Chat = () => {
       });
   };
 
+  const sendMessage = (content) => {
+    axios
+      .post("http://localhost:8888/message/post", {
+        sender: loggedOnUser,
+        content: content,
+      })
+      .catch((error) => {
+        if (error.response) {
+          setError(error.response.data);
+        }
+      });
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:8888/message/all")
@@ -77,7 +90,7 @@ const Chat = () => {
               ></Message>
             );
           })}
-          <Input></Input>
+          <Input sendMessage={sendMessage}></Input>
         </div>
       ) : (
         <LoginScreen login={login}></LoginScreen>
